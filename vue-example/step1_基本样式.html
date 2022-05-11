@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleCalendar</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="app">
+        <div class="calendar-card">
+            <div class="calendar-bar">
+                <button class="button button-year-minus">&lt;</button>
+                <button class="button button-month-minus">&lt;</button>
+                <div class="calendar-date">{{date.year}}-{{date.month}}-{{date.date}}</div>
+                <button class="button button-month-plus">&gt;</button>
+                <button class="button button-year-plus">&gt;</button>
+            </div>
+            <div class="calendar-content">
+                <ul class="ul-week">
+                    <li class="li-week" v-for="item in week">{{item}}</li>
+                </ul>
+                <ul class="ul-day">
+                    <li class="li-day" v-for="item in days">{{item}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                date:{
+                    year:2022,
+                    month:5,
+                    date:11
+                },
+                week:["日","一","二","三","四","五","六"],
+                days:[]
+            },
+            created(){
+                for(let i=0;i<42;i++){
+                    this.days.push(i)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

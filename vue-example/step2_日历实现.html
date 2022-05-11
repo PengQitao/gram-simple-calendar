@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleCalendar</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="calendar-card">
+            <div class="calendar-bar">
+                <button class="button button-year-minus" @click="minusYear(true)">&lt;</button>
+                <button class="button button-month-minus" @click="minusMonth">&lt;</button>
+                <div class="calendar-date">{{date.year}}-{{date.month+1}}-{{date.date}}</div>
+                <button class="button button-month-plus" @click="plusMonth">&gt;</button>
+                <button class="button button-year-plus" @click="plusYear(true)">&gt;</button>
+            </div>
+            <div class="calendar-content">
+                <ul class="ul-week">
+                    <li class="li-week" v-for="item in week">{{item}}</li>
+                </ul>
+                <ul class="ul-day">
+                    <li class="li-day" v-for="item in days" :isThisMonth="item.isThisMonth" @click="handleClick(item)">{{item.date}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                date: {
+                    year: "",
+                    month: "",
+                    date: ""
+                },
+                current: {
+                    year: "",
+                    month: "",
+                    date: "",
+                },
+                week: ["日", "一", "二", "三", "四", "五", "六"],
+                days: []
+            },
+            methods: {
+                handleClick: function (item) {
+                    console.log(item.year + "-" + item.month + "-" + item.date)
+                    alert(item.year + "-" + item.month + "-" + item.date)
+                },
+                plusMonth: function () {
+                    if (this.date.month == 11) {
+                        this.date.month = 0;
+                        this.plusYear(false)
+                    } else {
+                        this.date.month++;
+                    }
+                    this.createCalendar(this.date.year, this.date.month);
+                },
+                minusMonth: function () {
+                    if (this.date.month == 0) {
+                        this.date.month = 11;
+                        this.minusYear(false)
+                    } else {
+                        this.date.month--;
+                    }
+                    this.createCalendar(this.date.year, this.date.month);
+                },
+                plusYear: function (create) {
+                    if (this.date.year == 2049) {
+                        this.date.year = 1970;
+                    } else {
+                        this.date.year++;
+                    }
+                    if (create) {
+                        this.createCalendar(this.date.year, this.date.month);
+                    }
+                },
+                minusYear: function (create) {
+                    if (this.date.year == 1970) {
+                        this.date.year = 2049;
+                    } else {
+                        this.date.year--;
+                    }
+                    if (create) {
+                        this.createCalendar(this.date.year, this.date.month);
+                    }
+                },
+                createCalendar: function (year, month) {
+                    let d = new Date();
+                    d.setFullYear(year);
+                    d.setMonth(month);
+                    d.setDate(1);
+                    let dayOfFirstDay = d.getDay();
+                    this.days = []
+
+                    for (let i = 0; i < 42; i++) {
+
+                        d.setDate(1);
+                        d.setMonth(month)
+                        d.setDate(i - dayOfFirstDay + 1)
+
+                        let isThisMonth = 1
+                        if (d.getMonth() == month) {
+                            isThisMonth = 2
+                        } else {
+                            isThisMonth = 1
+                        }
+
+                        if (this.current.date == d.getDate() && this.current.month == d.getMonth() && this.current.year == d.getFullYear()) {
+                            isThisMonth=3
+                            let date = { year: year, month: month, date: d.getDate(), isThisMonth: isThisMonth }
+                            this.days.push(date)
+
+                        } else {
+                            let date = { year: d.getFullYear(), month: d.getMonth(), date: d.getDate(), isThisMonth: isThisMonth }
+
+                            this.days.push(date)
+                        }
+                    }
+
+                },
+            },
+            created() {
+                let d = new Date();
+                this.date.year = d.getFullYear();
+                this.date.month = d.getMonth();
+                this.date.date = d.getDate();
+
+                this.current.year = d.getFullYear();
+                this.current.month = d.getMonth();
+                this.current.date = d.getDate();
+
+                this.createCalendar(this.current.year, this.current.month)
+            }
+        })
+    </script>
+</body>
+
+</html>

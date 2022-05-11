@@ -1,0 +1,111 @@
+body {
+    background-color: #ddd;
+}
+
+.calendar-card {
+    position: absolute;
+    /* width: 290px; */
+    height: 220px;
+    padding: 5px 5px 0px 5px;
+    border: 1px solid #ebeef5;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.calendar-card:hover {
+    box-shadow: 0px 0px 5px 5px #cfcfcf;
+}
+
+.calendar-bar {
+    height: 40px;
+    color: #727272;
+    line-height: 40px;
+    text-align: center;
+    /* background-color: #ebeef5; */
+}
+
+.calendar-date {
+    display: inline-block;
+    width: 100px;
+}
+
+.button {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    color: #aaa;
+    border: 0;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.ul-week {
+    display: grid;
+    width: 245px;
+    grid-template-rows: 20px;
+    grid-template-columns: repeat(7, 35px);/**/
+    list-style: none;
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+    margin: 5px 20px 5px 20px;
+    padding-inline-start: 0px;
+    padding-inline-end: 0px;
+    border-bottom: 1px solid #eee;
+}
+
+.li-week {
+    display: inline-block;
+}
+
+.ul-day {
+    display: grid;
+    width: 245px;
+    grid-template-rows: repeat(6, 22px);
+    grid-template-columns: repeat(7, 35px);
+    list-style: none;
+    text-align: center;
+    margin: 5px 20px 5px 20px;
+    padding-inline-start: 0px;
+    padding-inline-end: 0px;
+}
+
+.li-day {
+    display: inline-block;
+    font-size: 10px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 5px;
+    margin: 1px;
+    color: rgb(91, 91, 91);
+}
+
+.li-day:hover {
+    background-color: #717de2;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.li-day[isThisMonth="1"] {
+    color: rgb(190, 190, 190);
+    font-size: 10px;
+}
+
+.li-day[isThisMonth="1"]:hover {
+    background-color: #717de2;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.li-day[isThisMonth="3"] {
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    background-color: #79bbff;
+    font-weight: 600;
+  }
