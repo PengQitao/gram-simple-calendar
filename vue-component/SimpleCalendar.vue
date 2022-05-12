@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  name:"SimpleCalendar",
   data() {
     return {
       date: {
