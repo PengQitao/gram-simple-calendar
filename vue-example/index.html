@@ -50,8 +50,8 @@
             },
             methods: {
                 handleClick: function (item) {
-                    console.log(item.year + "-" + item.month + "-" + item.date)
-                    alert(item.year + "-" + item.month + "-" + item.date)
+                    console.log(item.year + "-" + (item.month+1) + "-" + item.date)
+                    alert(item.year + "-" + (item.month+1) + "-" + item.date)
                 },
                 plusMonth: function () {
                     if (this.date.month == 11) {
